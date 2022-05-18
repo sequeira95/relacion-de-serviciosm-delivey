@@ -1,0 +1,75 @@
+<header id="main-header" class="py-2 bg-success bg-opacity-75 text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    <i class="fa-solid fa-address-card"></i> Perfil de Usuario
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="action" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a routerLink="/" class="btn btn-light btn-block">
+                        <i class="fas fa-arrow-left"></i>Regresar al inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Perfil de Usuario</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input 
+                                type="text"
+                                name="nombre"
+                                class="form-control"
+                                [(ngModel)]="datosUsuario.nombre"
+                                disabled
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="apellido">Apellido</label>
+                                <input 
+                                type="text"
+                                name="apellido"
+                                class="form-control"
+                                [(ngModel)]="datosUsuario.apellido"
+                                disabled>
+                            </div>                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input 
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                [(ngModel)]="datosUsuario.email"
+                                disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombreUsuario">Nombre de Usuario</label>
+                                <input 
+                                type="text"
+                                name="nombreUsuario"
+                                class="form-control"
+                                [(ngModel)]="datosUsuario.usuario"
+                                disabled>
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>

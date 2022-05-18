@@ -1,0 +1,55 @@
+<header id="main-header" class="bg-success bg-opacity-75 text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>
+                    <i class="fa-solid fa-gears"></i> Configuracion
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="action" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a routerLink="/" class="btn btn-light btn-block">
+                    <i class="fas fa-arrow-left"></i>Regresar al inicio
+                </a>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" (click)="guardar()" class="btn btn-primary btn-block">
+                    <i class="fa-solid fa-gear"></i> Guardar Configuracion
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Editar Configuracion</h4>
+                </div>
+                <div class="card-body">
+                    <fieldset class="form-group">
+                        <legend>Configurar el Porcentaje</legend>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <div class="form-group">
+                                    <input 
+                                    type="number"
+                                    name="cambiarPorcentaje"
+                                    class="form-control"
+                                    [(ngModel)]="porcentaje">
+                                </div>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

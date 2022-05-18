@@ -1,0 +1,35 @@
+<header id="main-header" class="bg-success bg-opacity-75 text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>
+                    <i><i class="fa-solid fa-user"></i></i>Relacion Servicios
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="action" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="card text-center mx-auto col-12 col-lg-6 border-success fs-5 ">
+                <h5 class="card-header">Saldo Total</h5>
+                <div class="card-body m-0 p-0">
+                    <h3 class="card-title">Saldo</h3>
+                    <h4 class="display-4">
+                        {{getSaldoTotal()|currency:'USD':'$'}}
+                    </h4>
+                </div>
+                <ul class="list-group list-group-flush d-flex flex-row justify-content-center align-items-center">
+                    <li class="list-group-item">Total Servicios {{this.serviciosTotal|currency:'USD':'$'}}</li>
+                    <li class="list-group-item">Total Pagos {{this.pagosTotal|currency:'USD':'$'}}</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="d-flex flex-wrap">
+<app-servicios class="flex-fill tables_tablero" (saldoTotal)="getSaldo($event)" ></app-servicios>
+<app-pagos class="flex-fill tables_tablero" (pagosTotal)="getPagos($event)"></app-pagos>
+</div>

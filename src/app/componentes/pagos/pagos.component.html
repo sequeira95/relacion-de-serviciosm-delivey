@@ -1,0 +1,119 @@
+<div id="Pagos" class="container flex-fill">
+    <div class="d-flex justify-content-end">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="my-2">
+                    <input 
+                    type="month" 
+                    name="filter" 
+                    (change)="filtro($event)">
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="#" class="btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#agregarPagoModal" >
+                        <i class="fas fa-plus"></i>Agregar Pago
+                    </a>
+                    </div>  
+                    <h4>Lista de Pagos</h4>
+                </div>
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Fecha</th>
+                            <th>Descripcion</th>
+                            <th>Saldo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pago of pagosFiltrados | slice:desde:hasta let i =index">
+                            <td>{{i+1}}</td>
+                            <td>{{pago.fecha}}</td>
+                            <td>{{pago.descripcion}}</td>
+                            <td>{{pago.saldo|currency:'USD':'$'}}</td>
+                            <td>
+                                <a routerLink="/pagos/editar/{{pago.id}}" class="btn btn-secondary">
+                                    <i class="fas fa-angle-double-right"></i>Editar
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator 
+                [length]="length"
+                [pageSize]="pageSize"
+                (page)="cambiar($event)"
+                aria-label="Select page">
+                </mat-paginator>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="agregarPagoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">Agregar Pago</h5>
+                <button class="btn-close" data-bs-dismiss="modal" #cerrarPago></button>
+            </div>
+            <flash-messages></flash-messages>
+            <form #pagoForm="ngForm" (ngSubmit)="agregar(pagoForm.form)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="fecha">Fecha</label>
+                        <input 
+                        type="date"
+                        name="fecha"
+                        class="form-control"
+                        required
+                        #fecha="ngModel"
+                        [(ngModel)]="pago.fecha"
+                        [ngClass]="{'is-invalid':fecha.errors && fecha.touched}"
+                        required>
+                        <div [hidden]="!fecha.errors?.required" class="invalid-feedback">
+                            Fecha requerida
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <input 
+                        type="text"
+                        name="descripcion"
+                        class="form-control"
+                        #descripcion="ngModel"
+                        [(ngModel)]="pago.descripcion"
+                        [ngClass]="{'is-invalid':descripcion.errors && descripcion.touched}"
+                        required
+                        minlength="2">
+                        <div [hidden]="!descripcion.errors?.required" class="invalid-feedback">
+                            Descripcion requerida
+                        </div>
+                        <div [hidden]="!descripcion.errors?.minlength" class="invalid-feedback">
+                            Debe tener al menos 2 caracteres
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="saldo">Saldo</label>
+                        <input 
+                        type="number"
+                        name="saldo"
+                        class="form-control"
+                        #saldo="ngModel"
+                        [(ngModel)]="pago.saldo"
+                        [ngClass]="{'is-invalid':saldo.errors && saldo.touched}"
+                        required>
+                        <div [hidden]="!saldo.errors?.required" class="invalid-feedback">
+                            Saldo requerido
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

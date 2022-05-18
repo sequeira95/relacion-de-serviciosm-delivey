@@ -1,0 +1,62 @@
+<nav *ngIf="isLoggedIn" class="navbar navbar-dark bg-dark p-0">
+  <div class="container-fluid">
+    <a routerLink="/" class="navbar-brand" >Relacion Servicios</a>
+    <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasNavbar">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+  <div style="backdrop-filter: 60px;background-color: rgba(0, 0, 0, 0.5);" class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar">
+    <div class="offcanvas-header">
+        <h5  class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido {{loggedInUser}}</h5>
+        <button
+        id="cerrarNavBar"
+        ype="button"
+        class="btn-close btn-close-white text-reset"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close">
+        </button>
+    </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+      <li class="nav-item px-2">
+        <a class="nav-link active text-light" aria-current="page" (click)="cerrarNavbar()" routerLink="/" >
+          <i class="fa-solid fa-house"></i>   Inicio</a>
+      </li>
+      <li class="nav-item px-2">
+        <a class="nav-link active text-light" aria-current="page" (click)="cerrarNavbar()" routerLink="/perfil" >
+          <i class="fa-solid fa-user"></i>  Perfil</a>
+      </li>
+      <li class="nav-item px-2">
+        <a class="nav-link active text-light" aria-current="page" (click)="cerrarNavbar()" routerLink="/configuracion" >
+          <i class="fa-solid fa-gears"></i>  Configuracion</a>
+      </li>
+      <li *ngIf="isLoggedIn" class="nav-item px-2">
+        <a style="cursor: pointer;" (click)="logout()" class="nav-link">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>   salir
+        </a>
+      </li>
+    </ul>
+  </div>
+  </div>
+  </div>
+</nav>
+<nav *ngIf="!isLoggedIn" class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+  <div class="container">
+      <a routerLink="/" class="navbar-brand">Relacion Servicio</a>
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="!isLoggedIn" class="nav-item">
+        <a routerLink="/login" class="nav-link" routerLinkActive="router-link-activate">
+          <i class="fas fa-user"></i>Ingresar
+        </a>
+      </li>
+      <li *ngIf="!isLoggedIn" class="nav-item">
+        <a routerLink="/registrarse" class="nav-link" routerLinkActive="router-link-activate">
+          <i class="fas fa-user"></i>Registrarse
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

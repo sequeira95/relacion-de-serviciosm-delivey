@@ -1,0 +1,101 @@
+<header id="main-header" class="py-2 bg-success bg-opacity-75 text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    <i class="fas fa-user"></i>Editar Pago
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<form #pagoForm="ngForm" (ngSubmit)="guardar(pagoForm.form)">
+    <flash-messages></flash-messages>
+
+    <!--Botones-->
+    <section id="action" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a routerLink="/" class="btn btn-light btn-block">
+                        <i class="fas fa-arrow-left"></i>Regresar al inicio
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-check"></i>Guardar Pago
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <a (click)="eliminar()" class="btn btn-danger btn-block">
+                        <i class="fas fa-trash"></i>Eliminar Pago
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Editar Pago</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="fecha">Fecha</label>
+                                <input 
+                                type="date"
+                                name="fecha"
+                                class="form-control"
+                                required
+                                #fecha="ngModel"
+                                [(ngModel)]="pago.fecha"
+                                [ngClass]="{'is-invalid':fecha.errors && fecha.touched}"
+                                required>
+                                <div [hidden]="!fecha.errors?.required" class="invalid-feedback">
+                                    Fecha requerida
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcion">Descripcion</label>
+                                <input 
+                                type="text"
+                                name="descripcion"
+                                class="form-control"
+                                #descripcion="ngModel"
+                                [(ngModel)]="pago.descripcion"
+                                [ngClass]="{'is-invalid':descripcion.errors && descripcion.touched}"
+                                required
+                                minlength="2">
+                                <div [hidden]="!descripcion.errors?.required" class="invalid-feedback">
+                                    Descripcion requerida
+                                </div>
+                                <div [hidden]="!descripcion.errors?.minlength" class="invalid-feedback">
+                                    Debe tener al menos 2 caracteres
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <label for="saldo">Saldo</label>
+                                <input 
+                                type="number" 
+                                name="saldo" 
+                                class="form-control"
+                                #saldo="ngModel"
+                                [(ngModel)]="pago.saldo"
+                                [ngClass]="{'is-invalid':saldo.errors && saldo.touched}"
+                                required>
+                                <div [hidden]="!saldo.errors?.required" class="invalid-feedback">
+                                    Saldo requerido
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</form>
