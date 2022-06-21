@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Pagos } from 'src/app/model/pagos.model';
 import { PagoService } from 'src/app/service/pago.service';
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-pagos',
@@ -27,6 +28,7 @@ export class PagosComponent implements OnInit {
 
   @ViewChild('pagoForm') pagoForm:NgForm
   @ViewChild('cerrarPago') cerrarPago:ElementRef
+  @ViewChild('table') table:ElementRef
 
 
   constructor(
@@ -85,5 +87,10 @@ filtro(event:any){
   this.length= pagosDelMes.length
   this.pagosFiltrados = pagosDelMes 
 }
-
+exportToTable(){
+  const table: XLSX.WorkSheet =XLSX.utils.table_to_sheet(this.table.nativeElement)
+  const book: XLSX.WorkBook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(book, table,"servicios")
+  XLSX.writeFile(book,"Servicios.xlsx")
+}
 }

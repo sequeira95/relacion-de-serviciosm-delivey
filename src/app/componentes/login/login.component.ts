@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/'])
               })
     .catch(error=>{
-      this.flashMessages.show(error.messages,{
+      this.flashMessages.show(error.messages||"Usuario o Contraseña incorrectos",{
         cssClass:"alert-danger", timeout:2000
       })
     })

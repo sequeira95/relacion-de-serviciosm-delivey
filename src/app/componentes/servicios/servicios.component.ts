@@ -2,11 +2,10 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { NgForm } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { Observable } from 'rxjs';
 import { Servicio } from 'src/app/model/servicio.model';
 import { ServicioService } from 'src/app/service/servicio.service';
 import { UsuariosService } from 'src/app/service/usuarios.service';
-
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-servicios',
@@ -31,11 +30,13 @@ export class ServiciosComponent implements OnInit {
 
   @ViewChild('servicioForm') servicioForm:NgForm
   @ViewChild('botonCerrar') botonCerrar:ElementRef
+  @ViewChild('table') table:ElementRef
 
   constructor(
     private servicioService:ServicioService,
     private flashMessages:FlashMessagesService,
-    private usaurioService:UsuariosService
+    private usaurioService:UsuariosService,
+
   ) {}
   
 
@@ -100,6 +101,12 @@ export class ServiciosComponent implements OnInit {
     this.length = serviciosDelMes.length
     this.serviciosFiltrados=serviciosDelMes
     
+  }
+  exportToTable(){
+    const table: XLSX.WorkSheet =XLSX.utils.table_to_sheet(this.table.nativeElement)
+    const book: XLSX.WorkBook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(book, table,"servicios")
+    XLSX.writeFile(book,"Servicios.xlsx")
   }
 }
 
